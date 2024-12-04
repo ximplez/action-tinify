@@ -1,9 +1,16 @@
-import {debug, endGroup, error, getInput, setFailed, startGroup} from '@actions/core'
+import {
+  debug,
+  endGroup,
+  error,
+  getInput,
+  setFailed,
+  startGroup
+} from '@actions/core'
 import {context} from '@actions/github'
 import tinify from 'tinify'
 import Git from './git'
 import Images from './images'
-import { validateKey } from './validate'
+import {validateKey} from './validate'
 
 async function run(): Promise<void> {
   try {
@@ -17,7 +24,7 @@ async function run(): Promise<void> {
       }
     }
     if (!v) {
-      throw error("no valid tiny key")
+      throw error('no valid tiny key')
     }
     endGroup()
 
