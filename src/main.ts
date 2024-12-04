@@ -1,12 +1,26 @@
-import {debug, endGroup, getInput, setFailed, startGroup} from '@actions/core'
+import {debug, endGroup, error, getInput, setFailed, startGroup} from '@actions/core'
 import {context} from '@actions/github'
 import tinify from 'tinify'
 import Git from './git'
 import Images from './images'
+import { validateKey } from './validate'
 
 async function run(): Promise<void> {
   try {
-    tinify.key = getInput('api_key', {required: true})
+    startGroup('Validate Keys')
+    const keys = JSON.parse(getInput('api_key', {required: true}))
+    let v = false
+    for (const key of keys) {
+      if (validateKey(key)) {
+        v = true
+        break
+      }
+    }
+    if (!v) {
+      throw error("no valid tiny key")
+    }
+    endGroup()
+
     const git = new Git({
       token: getInput('github_token', {required: true}),
       context
