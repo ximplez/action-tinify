@@ -28,7 +28,7 @@ inputs:
     required: false
 runs:
   using: 'docker'
-  image: 'ghcr.io/ximplez/github-action-tinify:v1.1.0'
+  image: Dockerfile
 branding:
   icon: 'image'
   color: 'green'
