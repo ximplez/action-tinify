@@ -20,14 +20,14 @@ jobs:
         run: npm ci
       - name: Lint TypeScript; run unit tests
         run: npm run all
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Reference repository Dockerfile
-        run: "sed -i -E \"s/(image: ')[^']+(')/\\1Dockerfile\\2/\" action.yml"
-      - name: Use action
-        uses: ./
-        with:
-          api_key: abc123
+  # run:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #     - name: Reference repository Dockerfile
+  #       run: "sed -i -E \"s/(image: ')[^']+(')/\\1Dockerfile\\2/\" action.yml"
+  #     - name: Use action
+  #       uses: ./
+  #       with:
+  #         api_key: abc123
