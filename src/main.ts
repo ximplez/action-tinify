@@ -3,8 +3,10 @@ import {
   endGroup,
   error,
   getInput,
+  info,
   setFailed,
-  startGroup
+  startGroup,
+  warning
 } from '@actions/core'
 import {context} from '@actions/github'
 import tinify from 'tinify'
@@ -16,12 +18,14 @@ async function run(): Promise<void> {
   try {
     startGroup('Validate Keys')
     const keys = JSON.parse(getInput('api_key', {required: true}))
+    info(`find ${keys.length} keys.`)
     let v = false
     for (const key of keys) {
       if (validateKey(key)) {
         v = true
         break
       }
+      warning(`find one key invalid!`)
     }
     if (!v) {
       throw error('no valid tiny key')
